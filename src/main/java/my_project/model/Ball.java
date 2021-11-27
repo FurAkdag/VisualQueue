@@ -9,7 +9,7 @@ import java.awt.*;
  * Repräsentiert eine Kugel (einen Kreis), der in eine Schlange eingefügt werden soll. Dabei muss jeder QueueBall immer
  * seinen Vorgänger kennen, damit er zu ihm Abstand halten kann.
  */
-public class Ball extends GraphicalObject {
+public class Ball extends GraphicalObject implements Animated{
 
     /**
      * Erzeugt einen neuen QueueBall
@@ -42,5 +42,7 @@ public class Ball extends GraphicalObject {
     public void update(double dt){
 
     }
+
+
 
 }
