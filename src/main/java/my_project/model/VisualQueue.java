@@ -1,9 +1,11 @@
 package my_project.model;
 
+import KAGO_framework.control.ViewController;
 import KAGO_framework.model.GraphicalObject;
 import KAGO_framework.view.DrawTool;
 
-public class VisualQueue<T extends GraphicalObject & Animated> {
+public class VisualQueue<T extends GraphicalObject & Animatible> {
+
 
     /* --------- Anfang der privaten inneren Klasse -------------- */
 
@@ -63,15 +65,17 @@ public class VisualQueue<T extends GraphicalObject & Animated> {
 
     private QueueNode head;
     private QueueNode tail;
+    private ViewController viewController;
 
     /**
      * Eine leere Schlange wird erzeugt.
      * Objekte, die in dieser Schlange verwaltet werden, muessen vom Typ
      * ContentType sein.
      */
-    public VisualQueue() {
+    public VisualQueue(ViewController viewController) {
         head = null;
         tail = null;
+        this.viewController = viewController;
     }
 
     /**
@@ -94,6 +98,7 @@ public class VisualQueue<T extends GraphicalObject & Animated> {
     public void enqueue(T pContent) {
         if (pContent != null) {
             QueueNode newNode = new QueueNode(pContent);
+            viewController.draw(newNode);
             if (this.isEmpty()) {
                 head = newNode;
                 tail = newNode;
@@ -110,6 +115,7 @@ public class VisualQueue<T extends GraphicalObject & Animated> {
      */
     public void dequeue() {
         if (!this.isEmpty()) {
+            viewController.removeDrawable(head);
             head = head.getNext();
             if (this.isEmpty()) {
                 head = null;

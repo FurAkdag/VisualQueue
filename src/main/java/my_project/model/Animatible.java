@@ -1,7 +1,7 @@
 package my_project.model;
 
 
-public interface Animated{
+public interface Animatible {
 
     //help
 
