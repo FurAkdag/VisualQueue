@@ -44,5 +44,14 @@ public class Ball extends GraphicalObject implements Animatible {
     }
 
 
+    @Override
+    public void fadeIn() {
+
+    }
+
+    @Override
+    public void fadeOut() {
+
+    }
 
 }
