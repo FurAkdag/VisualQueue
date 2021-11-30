@@ -21,7 +21,6 @@ public class Ball extends GraphicalObject implements Animatible {
         this.y = y;
     }
 
-
     /**
      * Selbsterklärend: zeichnet den QueueBall. Wird vom Framework automatisch aufgerufen (jede Frame 1x).
      */
@@ -40,13 +39,19 @@ public class Ball extends GraphicalObject implements Animatible {
      */
     @Override
     public void update(double dt){
-
+        if(fadingIn){
+            if(x < tX) x += 50*dt;
+            if(y < tY) y += 50*dt;
+        }
     }
-
 
     @Override
     public void fadeIn() {
-
+        fadingIn = true;
+        tX = x;
+        tY = y;
+        x = tX-100;
+        y = tY - 50;
     }
 
     @Override

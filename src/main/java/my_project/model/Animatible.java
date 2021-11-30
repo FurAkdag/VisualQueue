@@ -1,12 +1,15 @@
 package my_project.model;
 
-
-import KAGO_framework.view.DrawTool;
-
 public interface Animatible {
 
     void fadeIn();
-    void fadeOut();
 
+    void fadeOut();
+    
+    void changeSize(double Size);
+
+    void setPreviouse();
+
+    void getPreviouse();
 
 }

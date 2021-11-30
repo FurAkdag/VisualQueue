@@ -3,6 +3,7 @@ package my_project.control;
 import KAGO_framework.control.ViewController;
 import KAGO_framework.model.abitur.datenstrukturen.Queue;
 import my_project.model.Ball;
+import my_project.model.VisualQueue;
 import my_project.view.InputManager;
 
 import java.awt.event.MouseEvent;
