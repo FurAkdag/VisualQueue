@@ -19,7 +19,8 @@ public class ProgramController {
 
     // Referenzen
     private ViewController viewController;  // diese Referenz soll auf ein Objekt der Klasse viewController zeigen. Über dieses Objekt wird das Fenster gesteuert.
-
+    private VisualQueue<Ball> ballVisualQueue;
+    private int test = 10;
     /**
      * Konstruktor
      * Dieser legt das Objekt der Klasse ProgramController an, das den Programmfluss steuert.
@@ -29,6 +30,8 @@ public class ProgramController {
      */
     public ProgramController(ViewController viewController){
         this.viewController = viewController;
+        ballVisualQueue = new VisualQueue<>(viewController, 50,200);
+        new InputManager(this,viewController);
     }
 
     /**
@@ -37,10 +40,21 @@ public class ProgramController {
      */
     public void startProgram() {
         // Erstelle ein Objekt der Klasse Ball und lasse es zeichnen
-        Ball ball1 = new Ball(150,150);
-        viewController.draw(ball1);
+
 
     }
+
+    public void addBall(){
+        Ball ball = new Ball(test);
+        ballVisualQueue.enqueue(ball);
+        test += 5;
+    }
+
+    public void deleteBall(){
+        ballVisualQueue.dequeue();
+        test -= 5;
+    }
+
 
     /**
      * Aufruf mit jeder Frame

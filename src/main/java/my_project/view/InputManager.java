@@ -23,6 +23,8 @@ public class InputManager extends InteractiveGraphicalObject {
      */
     public InputManager(ProgramController programController, ViewController viewController){
         this.programController = programController;
+        this.viewController = viewController;
+        viewController.register(this);
 
     }
 
@@ -34,6 +36,9 @@ public class InputManager extends InteractiveGraphicalObject {
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if(e.getButton() == MouseEvent.BUTTON1){
+            programController.addBall();
+        }
     }
 
 }

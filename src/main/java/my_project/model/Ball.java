@@ -16,9 +16,12 @@ public class Ball extends GraphicalObject implements Animatible {
      * @param x Startposition x
      * @param y Startposition y
      */
-    public Ball(double x, double y){
-        this.x = x;
-        this.y = y;
+    private boolean fadingIn;
+    private double tX;
+    private double tY;
+
+    public Ball(double radius){
+        this.radius = radius;
     }
 
     /**
@@ -26,10 +29,8 @@ public class Ball extends GraphicalObject implements Animatible {
      */
     @Override
     public void draw(DrawTool drawTool) {
-        drawTool.drawFilledCircle(x,y,20);
         drawTool.setCurrentColor(Color.RED);
-        drawTool.drawCircle(x,y,10);
-        drawTool.drawCircle(x,y,5);
+        drawTool.drawFilledCircle(x,y,radius);
     }
 
     /**
@@ -54,9 +55,5 @@ public class Ball extends GraphicalObject implements Animatible {
         y = tY - 50;
     }
 
-    @Override
-    public void fadeOut() {
-
-    }
 
 }
