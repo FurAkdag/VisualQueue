@@ -6,7 +6,7 @@ import KAGO_framework.model.abitur.datenstrukturen.Queue;
 
 public class VisualQueue<T extends GraphicalObject & Animatible> {
 
-    private final Queue<T> queue;
+    private Queue<T> queue;
     private ViewController viewController;
     private double posX;
     private double posY;

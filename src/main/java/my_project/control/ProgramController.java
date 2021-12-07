@@ -2,6 +2,7 @@ package my_project.control;
 
 import KAGO_framework.control.ViewController;
 import my_project.model.Ball;
+import my_project.model.Rectangel;
 import my_project.model.VisualQueue;
 import my_project.view.InputManager;
 
@@ -17,7 +18,9 @@ public class ProgramController {
     // Referenzen
     private ViewController viewController;  // diese Referenz soll auf ein Objekt der Klasse viewController zeigen. Über dieses Objekt wird das Fenster gesteuert.
     private VisualQueue<Ball> ballVisualQueue;
-    private int test = 10;
+    private VisualQueue<Rectangel> rectangelVisualQueue;
+
+
     /**
      * Konstruktor
      * Dieser legt das Objekt der Klasse ProgramController an, das den Programmfluss steuert.
@@ -28,6 +31,7 @@ public class ProgramController {
     public ProgramController(ViewController viewController){
         this.viewController = viewController;
         ballVisualQueue = new VisualQueue<>(viewController, 50,200);
+        rectangelVisualQueue = new VisualQueue<>(viewController, 50,200);
         new InputManager(this,viewController);
     }
 
@@ -45,6 +49,15 @@ public class ProgramController {
 
     public void deleteBall(){
         ballVisualQueue.dequeue();
+    }
+
+    public void addRectangel(){
+        Rectangel newRectangel = new Rectangel(20, 20);
+        rectangelVisualQueue.enqueue(newRectangel);
+    }
+
+    public void deleteRectangel(){
+        rectangelVisualQueue.dequeue();
     }
 
 

@@ -5,24 +5,16 @@ import KAGO_framework.view.DrawTool;
 
 import java.awt.*;
 
-/**
- * Repräsentiert eine Kugel (einen Kreis), der in eine Schlange eingefügt werden soll. Dabei muss jeder QueueBall immer
- * seinen Vorgänger kennen, damit er zu ihm Abstand halten kann.
- */
-public class Ball extends GraphicalObject implements Animatible {
+public class Rectangel extends GraphicalObject implements Animatible {
 
-    /**
-     * Erzeugt einen neuen QueueBall
-     * @param x Startposition x
-     * @param y Startposition y
-     */
-    private boolean fadingIn;
     private boolean isArrived;
+    private boolean fadingIn;
     private double tX;
     private double tY;
 
-    public Ball(double radius){
-        this.radius = radius;
+    public Rectangel(double width, double height){
+        this.width = width;
+        this.height = height;
     }
 
     /**
@@ -31,7 +23,7 @@ public class Ball extends GraphicalObject implements Animatible {
     @Override
     public void draw(DrawTool drawTool) {
         drawTool.setCurrentColor(Color.RED);
-        drawTool.drawFilledCircle(x,y,radius);
+        drawTool.drawFilledRectangle(x,y,width,height);
     }
 
     /**
@@ -42,15 +34,15 @@ public class Ball extends GraphicalObject implements Animatible {
     @Override
     public void update(double dt){
         if(fadingIn){
-            if (x < tX) x += 50 * dt;
-            if (x > tX) x -= 50 * dt;
-            if (y < tY) y += 50 * dt;
+            if(x < tX) x += 50*dt;
+            if(x > tX) x -= 50*dt;
+            if(y < tY) y += 50*dt;
             if(x > tX - 5) isArrived = true;
         }
     }
 
     @Override
-    public void fadeIn(){
+    public void fadeIn() {
         fadingIn = true;
         tX = x;
         tY = y;
@@ -89,3 +81,4 @@ public class Ball extends GraphicalObject implements Animatible {
     }
 
 }
+
