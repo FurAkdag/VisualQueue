@@ -37,7 +37,10 @@ public class InputManager extends InteractiveGraphicalObject {
     @Override
     public void mouseReleased(MouseEvent e) {
         if(e.getButton() == MouseEvent.BUTTON1){
-            programController.addBall();
+            programController.addRectangel();
+        }
+        if(e.getButton() == MouseEvent.BUTTON3){
+            programController.deleteRectangel();
         }
     }
 

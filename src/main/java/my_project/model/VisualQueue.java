@@ -12,14 +12,14 @@ public class VisualQueue<T extends GraphicalObject & Animatible> {
     private double posY;
     private double startX;
     private double startY;
-    private T previouse;
+    private T previous;
 
     public VisualQueue(ViewController viewController, double posX, double posY){
         this.posX = posX;
         this.posY = posY;
         startX = posX;
         startY = posY;
-        previouse = null;
+        previous = null;
         queue = new Queue<>();
         this.viewController = viewController;
     }
@@ -54,23 +54,29 @@ public class VisualQueue<T extends GraphicalObject & Animatible> {
 
     public void dequeue(){
         if(!queue.isEmpty()){
-            viewController.removeDrawable(queue.front());
-            queue.dequeue();
-            if(queue.isEmpty()){
-                posX = startX;
-                posY = startY;
+            if(queue.front().isArrived()){
+                viewController.removeDrawable(queue.front());
+                double radius = queue.front().getRadius();
+                double width = queue.front().getWidth();
+                queue.dequeue();
+                //Rest bewegen
+                Queue<T> newQueue = new Queue<>();
+                while(!queue.isEmpty()){
+                    newQueue.enqueue(queue.front());
+                    if(radius == 0){
+                        queue.front().setTx(queue.front().getX() - width);
+                    }else {
+                        queue.front().setTx(queue.front().getX() - radius * 2);
+                    }
+                    queue.dequeue();
+                }
+                if(radius == 0){
+                    posX -= width;
+                }else {
+                    posX -= radius*2;
+                }
+                queue = newQueue;
             }
         }
-
     }
-
-    public void front(){
-        queue.front();
-    }
-
-    //Extra Methoden
-
-
-
-
 }
