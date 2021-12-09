@@ -10,16 +10,10 @@ public class VisualQueue<T extends GraphicalObject & Animatible> {
     private ViewController viewController;
     private double posX;
     private double posY;
-    private double startX;
-    private double startY;
-    private T previous;
 
     public VisualQueue(ViewController viewController, double posX, double posY){
         this.posX = posX;
         this.posY = posY;
-        startX = posX;
-        startY = posY;
-        previous = null;
         queue = new Queue<>();
         this.viewController = viewController;
     }
@@ -78,5 +72,9 @@ public class VisualQueue<T extends GraphicalObject & Animatible> {
                 queue = newQueue;
             }
         }
+    }
+
+    public T getFront(){
+        return queue.front();
     }
 }

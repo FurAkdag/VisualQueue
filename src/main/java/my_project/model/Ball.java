@@ -42,11 +42,20 @@ public class Ball extends GraphicalObject implements Animatible {
     @Override
     public void update(double dt){
         if(fadingIn){
-            if (x < tX) x += 50 * dt;
-            if (x > tX) x -= 50 * dt;
-            if (y < tY) y += 50 * dt;
+            if (x < tX) {
+                x += 50 * dt;
+            }
+            if (x > tX) {
+                x -= 50 * dt;
+            }
+            if (y < tY) {
+                y += 50 * dt;
+            }else{
+                y = tY;
+            }
             if(x > tX - 5) isArrived = true;
         }
+
     }
 
     @Override
@@ -58,30 +67,13 @@ public class Ball extends GraphicalObject implements Animatible {
         y = tY - 50;
     }
 
-    @Override
-    public void setNewPosition(int x, int y) {
-
-    }
 
     @Override
     public void setTx(double tx) {
         this.tX = tx;
     }
 
-    @Override
-    public double getTx() {
-        return tX;
-    }
 
-    @Override
-    public double getTy() {
-        return tY;
-    }
-
-    @Override
-    public void setTy(double ty) {
-        tY = ty;
-    }
 
     @Override
     public boolean isArrived() {
