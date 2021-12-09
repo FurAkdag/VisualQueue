@@ -50,30 +50,12 @@ public class Rectangel extends GraphicalObject implements Animatible {
         y = tY - 50;
     }
 
-    @Override
-    public void setNewPosition(int x, int y) {
-
-    }
 
     @Override
     public void setTx(double tx) {
         this.tX = tx;
     }
 
-    @Override
-    public double getTx() {
-        return tX;
-    }
-
-    @Override
-    public double getTy() {
-        return tY;
-    }
-
-    @Override
-    public void setTy(double ty) {
-        tY = ty;
-    }
 
     @Override
     public boolean isArrived() {
