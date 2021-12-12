@@ -30,8 +30,8 @@ public class ProgramController {
      */
     public ProgramController(ViewController viewController){
         this.viewController = viewController;
-        ballVisualQueue = new VisualQueue<>(viewController, 50,200);
-        rectangelVisualQueue = new VisualQueue<>(viewController, 50,200);
+        ballVisualQueue = new VisualQueue<>(viewController, 500,600, "up");
+        rectangelVisualQueue = new VisualQueue<>(viewController, 50,200, "right");
         new InputManager(this,viewController);
     }
 

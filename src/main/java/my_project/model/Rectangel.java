@@ -5,7 +5,7 @@ import KAGO_framework.view.DrawTool;
 
 import java.awt.*;
 
-public class Rectangel extends GraphicalObject implements Animatible {
+public class Rectangel extends GraphicalObject implements VisualQueue.Animatible {
 
     private boolean isArrived;
     private boolean fadingIn;
@@ -50,6 +50,21 @@ public class Rectangel extends GraphicalObject implements Animatible {
         y = tY - 50;
     }
 
+
+    @Override
+    public void setTy(double ty) {
+        tY = ty;
+    }
+
+    @Override
+    public double getTx() {
+        return tX;
+    }
+
+    @Override
+    public double getTy() {
+        return tY;
+    }
 
     @Override
     public void setTx(double tx) {

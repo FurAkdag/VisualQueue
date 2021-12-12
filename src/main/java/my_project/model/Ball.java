@@ -9,7 +9,7 @@ import java.awt.*;
  * Repräsentiert eine Kugel (einen Kreis), der in eine Schlange eingefügt werden soll. Dabei muss jeder QueueBall immer
  * seinen Vorgänger kennen, damit er zu ihm Abstand halten kann.
  */
-public class Ball extends GraphicalObject implements Animatible {
+public class Ball extends GraphicalObject implements VisualQueue.Animatible {
 
     /**
      * Erzeugt einen neuen QueueBall
@@ -50,8 +50,9 @@ public class Ball extends GraphicalObject implements Animatible {
             }
             if (y < tY) {
                 y += 50 * dt;
-            }else{
-                y = tY;
+            }
+            if(y > tY){
+                y -= 50 * dt;
             }
             if(x > tX - 5) isArrived = true;
         }
@@ -73,6 +74,19 @@ public class Ball extends GraphicalObject implements Animatible {
         this.tX = tx;
     }
 
+    @Override
+    public void setTy(double ty) {
+        tY = ty;
+    }
+    @Override
+    public double getTx() {
+        return tX;
+    }
+
+    @Override
+    public double getTy() {
+        return tY;
+    }
 
 
     @Override
