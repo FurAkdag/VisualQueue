@@ -50,6 +50,11 @@ public class Rectangel extends GraphicalObject implements VisualQueue.Animatible
         y = tY - 50;
     }
 
+    @Override
+    public void fadeOut(boolean fadeOut) {
+
+    }
+
 
     @Override
     public void setTy(double ty) {

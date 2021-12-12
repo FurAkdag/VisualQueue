@@ -11,6 +11,8 @@ public class VisualQueue<T extends GraphicalObject & VisualQueue.Animatible> {
 
         void fadeIn();
 
+        void fadeOut(boolean fadeOut);
+
         void setTx(double tx);
 
         void setTy(double ty);
@@ -83,6 +85,7 @@ public class VisualQueue<T extends GraphicalObject & VisualQueue.Animatible> {
         if(!queue.isEmpty()){
             if(queue.front().isArrived()){
                 viewController.removeDrawable(queue.front());
+                queue.front().fadeOut(true);
                 double radius = queue.front().getRadius();
                 double width = queue.front().getWidth();
                 double height = queue.front().getHeight();
