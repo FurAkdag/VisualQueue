@@ -64,8 +64,8 @@ public class Ball extends GraphicalObject implements VisualQueue.Animatible {
         fadingIn = true;
         tX = x;
         tY = y;
-        x = tX-(Math.random()*400)+10;
-        y = tY - (Math.random()*400)+10;
+        x = tX;
+        y = tY;
     }
 
     @Override

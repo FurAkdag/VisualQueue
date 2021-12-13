@@ -44,4 +44,16 @@ public class InputManager extends InteractiveGraphicalObject {
         }
     }
 
+    @Override
+    public void keyPressed(int key) {
+        if(key == KeyEvent.VK_UP){
+            programController.moveBall("up");
+        }else if(key == KeyEvent.VK_DOWN){
+            programController.moveBall("down");
+        }else if(key == KeyEvent.VK_RIGHT){
+            programController.moveBall("right");
+        } else if (key == KeyEvent.VK_LEFT) {
+            programController.moveBall("left");
+        }
+    }
 }
