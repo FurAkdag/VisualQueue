@@ -56,7 +56,7 @@ public class VisualQueue<T extends GraphicalObject & VisualQueue.Animatible> {
      * Diese sind die Position eures ersten Objektes.
      * Dem String direction könnt iht nur "up" oder "right" weitergeben.
      * bei "up" werden neue Objekte oben und bei "right" rechts ran gepackt.
-     * Dann gibts noch das special "movable".
+     * Dann gibts noch das special "movable". Da lieber keine Animationen nutzen, könnte zu fehlern führen.
      * Da wird die queue zu einer art "Schlange".
      * Mit moveQueue() kannst du die Queue dann bewegen.
      */
