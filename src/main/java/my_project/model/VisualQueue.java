@@ -155,7 +155,7 @@ public class VisualQueue<T extends GraphicalObject & VisualQueue.Animatible> {
      * und danach von der Queue entfernt.
      * Hiernach werden die Positionen nach vorne hin um die breite des entfernten Objektes verschoben.
      * Dabei wird tX/tY auf die position durch setTx()/setTy() gesetzt (Nicht x/y!!)
-     *Falls movable aktiv ist, wird nur das vorderste gelöscht.
+     *Falls movable aktiv ist, wird das Visuel HINTERSTE!! gelöscht.
      */
 
     public void dequeue(){
