@@ -30,8 +30,7 @@ public class ProgramController {
      */
     public ProgramController(ViewController viewController){
         this.viewController = viewController;
-        ballVisualQueue = new VisualQueue<>(viewController, 300,300);
-        ballVisualQueue.setMovable(true);
+        ballVisualQueue = new VisualQueue<>(viewController, 300,300, "movable");
         rectangelVisualQueue = new VisualQueue<>(viewController, 50,200, "right");
         new InputManager(this,viewController);
     }
@@ -63,13 +62,13 @@ public class ProgramController {
 
     public void moveBall(String direction){
         if(direction.equals("up")){
-            ballVisualQueue.moveQueue(-20,0);
+            ballVisualQueue.moveQueue(-40,0);
         }else if(direction.equals("down")){
-            ballVisualQueue.moveQueue(20,0);
+            ballVisualQueue.moveQueue(40,0);
         }else if(direction.equals("right")){
-            ballVisualQueue.moveQueue(0,20);
+            ballVisualQueue.moveQueue(0,40);
         }else if(direction.equals("left")){
-            ballVisualQueue.moveQueue(0,-20);
+            ballVisualQueue.moveQueue(0,-40);
         }
     }
 

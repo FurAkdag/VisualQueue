@@ -56,6 +56,9 @@ public class VisualQueue<T extends GraphicalObject & VisualQueue.Animatible> {
      * Diese sind die Position eures ersten Objektes.
      * Dem String direction könnt iht nur "up" oder "right" weitergeben.
      * bei "up" werden neue Objekte oben und bei "right" rechts ran gepackt.
+     * Dann gibts noch das special "movable".
+     * Da wird die queue zu einer art "Schlange".
+     * Mit moveQueue() kannst du die Queue dann bewegen.
      */
 
     public VisualQueue(ViewController viewController, double posX, double posY, String direction){
@@ -64,47 +67,41 @@ public class VisualQueue<T extends GraphicalObject & VisualQueue.Animatible> {
         frontX = posX;
         frontY = posY;
         this.direction = direction;
+
+        if(direction.equals("movable")) movable = true;
+
         queue = new Queue<>();
 
         this.viewController = viewController;
         helpX = new List<>();
         helpY = new List<>();
+        allowed = true;
     }
 
     /**
      * Still in progress ~
      */
 
-    public VisualQueue(ViewController viewController, double posX, double posY){
-        this.posX = posX;
-        this.posY = posY;
-        frontX = posX;
-        frontY = posY;
-        direction = "ff";
-        queue = new Queue<>();
-        helpX = new List<>();
-        helpY = new List<>();
-        this.viewController = viewController;
-        allowed = false;
-    }
+
 
     /**
      * Es wird ein neues Objekt hinzugefügt und an die position posX/posY gepackt.
      * Danach wird posX oder posY (je nachdem ob eure Queue "up" oder "right" geht)
      * um den Radius oder die höhe/breite eures Objektes verschoben, damit das nächste
      * Objekt seine neue Position richtig verteilt bekommt.
+     * Bei movable: Es kann nur ein neues Objekt hinzugefügt werden, nachdem es sich min. 1 mal nach
+     * dem hinzufügen eines Objektes vergehen, damit man ein neues Objekt hinzufügen kann.
      */
 
     public void enqueue(T content){
-        if(content != null) {
+        if(content != null & allowed) {
             queue.enqueue(content);
             if (!queue.isEmpty()) {
-                if(movable && allowed) {
-                    content.setY(posY);
-                    content.setX(posX);
+                if(movable) {
+                    content.setTy(posY);
+                    content.setTx(posX);
                     helpX.append(posX);
                     helpY.append(posY);
-                    allowed = false;
                 }else{
                     if (content.getRadius() == 0) {
                         content.setY(posY);
@@ -148,6 +145,7 @@ public class VisualQueue<T extends GraphicalObject & VisualQueue.Animatible> {
 
             viewController.draw(content);
             content.fadeIn();
+            allowed = false;
         }
     }
 
@@ -157,7 +155,7 @@ public class VisualQueue<T extends GraphicalObject & VisualQueue.Animatible> {
      * und danach von der Queue entfernt.
      * Hiernach werden die Positionen nach vorne hin um die breite des entfernten Objektes verschoben.
      * Dabei wird tX/tY auf die position durch setTx()/setTy() gesetzt (Nicht x/y!!)
-     *
+     *Falls movable aktiv ist, wird nur das vorderste gelöscht.
      */
 
     public void dequeue(){
@@ -167,8 +165,9 @@ public class VisualQueue<T extends GraphicalObject & VisualQueue.Animatible> {
                 queue.front().fadeOut(true);
                 if(movable){
                     queue.dequeue();
-                    helpY.toLast(); helpY.remove();
-                    helpX.toLast(); helpX.remove();
+                    helpY.toFirst(); helpY.remove();
+                    helpX.toFirst(); helpX.remove();
+                    moveQueue(0,0);
                 }else{
                     double radius = queue.front().getRadius();
                     double width = queue.front().getWidth();
@@ -220,36 +219,47 @@ public class VisualQueue<T extends GraphicalObject & VisualQueue.Animatible> {
     }
 
     /**
-     * Still in progress ~
+     * Beta version!
+     *
+     *
+     * Bewegt den Kopf der Schlange in richtung der weitergegebenen werte in x oder y richtung.
+     * Die teile davor nehmen die Position von dem, der vor ihm war ein.
      */
-
-    public void setMovable(boolean move){
-        movable = move;
-    }
 
     public void moveQueue(double inY, double inX){
         if(!queue.isEmpty()) {
             frontX += inX;
             frontY += inY;
-            helpX.toFirst(); helpX.insert(frontX);
-            helpY.toFirst(); helpY.insert(frontY);
-            helpX.toLast(); helpX.remove();
-            helpY.toLast(); helpY.remove();
+
+            helpX.toFirst();
+            helpX.insert(frontX);
+
+            helpY.toFirst();
+            helpY.insert(frontY);
+
+            helpX.toLast();
+            helpX.remove();
+
+            helpY.toLast();
+            helpY.remove();
 
             Queue<T> tmp = queue;
             helpY.toFirst(); helpX.toFirst();
-            while (!queue.isEmpty()) {
+            while (!queue.isEmpty() && helpX.hasAccess()) {
                 queue.front().setTx(helpX.getContent());
-                queue.front().setTx(helpY.getContent());
+                queue.front().setTy(helpY.getContent());
                 tmp.enqueue(queue.front());
-                posX = helpX.getContent(); posY = helpY.getContent();
                 queue.dequeue();
                 helpX.next(); helpY.next();
             }
+            helpX.toLast();
+            helpY.toLast();
+            posX = helpX.getContent(); posY = helpY.getContent();
 
             queue = tmp;
             allowed = true;
         }
+
 
 
     }

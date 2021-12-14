@@ -41,31 +41,14 @@ public class Ball extends GraphicalObject implements VisualQueue.Animatible {
      */
     @Override
     public void update(double dt){
-        if(fadingIn){
-            if (x < tX) {
-                x += 50 * dt;
-            }
-            if (x > tX) {
-                x -= 50 * dt;
-            }
-            if (y < tY) {
-                y += 50 * dt;
-            }
-            if(y > tY){
-                y -= 50 * dt;
-            }
-            if(x > tX - 5) isArrived = true;
-        }
-
+        x = tX;
+        y = tY;
+        isArrived = true;
     }
 
     @Override
     public void fadeIn(){
-        fadingIn = true;
-        tX = x;
-        tY = y;
-        x = tX;
-        y = tY;
+
     }
 
     @Override
