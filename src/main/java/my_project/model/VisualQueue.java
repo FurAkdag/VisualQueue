@@ -145,7 +145,7 @@ public class VisualQueue<T extends GraphicalObject & VisualQueue.Animatible> {
 
             viewController.draw(content);
             content.fadeIn();
-            allowed = false;
+            if(movable) allowed = false;
         }
     }
 
